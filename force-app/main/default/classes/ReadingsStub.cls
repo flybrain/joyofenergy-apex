@@ -24,4 +24,16 @@ public without sharing class ReadingsStub {
             insert readings;
         }
     }
+
+    @AuraEnabled
+    public static List<AccountVO> getAccounts(){
+        List<AccountVO> accountVOList = new List<AccountVO>();
+        AccountVO accountVO;
+        for (Account account: [SELECT Name FROM Account]) {
+            accountVO = new AccountVO();
+            accountVO.accountName = account.Name;
+            accountVOList.add(accountVO);
+        }
+        return accountVOList;
+    }
 }
